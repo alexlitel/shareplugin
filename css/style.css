@@ -1,0 +1,68 @@
+#social ul {
+  width: 6.5rem;
+    border-radius: 20px;
+
+}
+#social li {
+
+ width: 6.5rem;
+  display: block;
+  height: 6.5rem;
+  font-family: sans-serif;
+   color: rgba(255,255,255,0.9);
+  font-size: 2rem;
+  text-align: center;
+  list-style: none;
+
+
+}
+
+#social li p {
+  margin: 0;
+}
+
+#social .share {
+  background: red;
+  
+}
+
+
+.twitter {
+  background: #55acee;
+  
+}
+
+.facebook {
+  background: #3b5998;
+}
+
+#social .facebook, #social .twitter
+{
+  display: none;
+
+}
+
+.num {
+  color: rgba(255,255,255,1);
+  -webkit-font-smoothing: antialiased;
+}
+
+
+
+.sharelink {   
+    -webkit-font-smoothing: antialiased;
+  margin-top: 11px;
+  font-size:1.5rem;
+  text-align: center;
+  
+  text-decoration: none;
+  font-weight: bold;
+ color: rgba(255,255,255,1);
+  height: 100%;
+  vertical-align: middle;
+}
+
+.sharelink:hover, .sharelink:active {
+  border-bottom: 1px dotted;
+ color: rgba(255,255,255,0.75);
+}
