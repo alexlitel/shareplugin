@@ -16,7 +16,7 @@ $('#social li').on('click touchstart', '.sharelink', function(evt) {
   evt.preventDefault();
   //grab url inside 'shareclick' class
   window.open($(this).attr('href'), "_blank");
-
+//test: console.log('sharelink event succesful');
   return false;
 });
 
@@ -28,7 +28,7 @@ $('#social li').on('keypress', function(e) {
     e.preventDefault();
     //grab url inside 'shareclick' class
     window.open($(this).children('.sharelink').attr('href'), "_blank");
-
+//test: console.log('#social li alt event successful');
     return false;
   }
 });
@@ -54,6 +54,7 @@ function getnumString(num) {
   } else if (num > 1000000000){
     numString = (Math.round((num / 1000000) * 10) / 10) + "B"
   }
+  //test: console.log("the changed number string is " + numString.toString());
   //return number in string format
   return numString.toString();
 }
@@ -66,47 +67,57 @@ $.when(
     twCount = data.count;
     //append Twitter count to list
     $('.twitter').append('<p class="num">' + getnumString(twCount) + '</p>');
+    //test: console.log("twitter shares " + twCount);
   }),
 
   //$getJSON method to get Facebook count
   $.getJSON(facebookCountUrl, function facebookCount(data) {
     //set count from JSON equal to previously declared variable
       fbCount = data.data[0].like_count;
+      //test: console.log("fb shares " + fbCount);
       //append Twitter count to list
       $('.facebook').append('<p class="num">' + getnumString(fbCount) + '</p>');
       //if the Facebook count is done, execute the functiont to calculate total count
     })).done(function(response) {
   totalCount = fbCount + twCount;
+  //test: console.log("total shares " + totalCount);
   //append total count to initial element
   $('.share').append('<p class="num">' + getnumString(totalCount) + '</p>');
+  
 });
 
 //event to reveal FB and Twitter count LIs upon interaction with the share UL
 $('#social ul').on('mouseover touchstart focusin', function() {
   //slide down LI elements and change aria attribute
   $('.facebook, .twitter').slideDown("slow").attr("aria-hidden", "false");
+  //test: console.log("successful ul slide event");
 //event to hide FB and Twitter counts upon stop interaction with the share UL
 }).on('mouseleave focusout', function() {
   $('.facebook, .twitter').hide().attr("aria-hidden", "true");
-
+//test: console.log("successful hide event");
 });
 //equivalent hide event for mobile devices
 $('.share').on('touchend', function() {
   $('.facebook, .twitter').hide().$('.facebook, .twitter').attr("aria-hidden", "true");
+  //test: console.log("mobile hide event success");
 })
 
 //listener event to change Twitter LI to suggest sharing page upon interaction with LI
 $('#social .twitter').on('mouseenter touchmove', function() {
   //change share count text to share link
   $(this).html('<a  class="sharelink" href="' + twShareUrl + '">TWEET<br>LINK</a>');
+  //test: console.log("successful twitter li change event");
 }).on('mouseleave touchcancel touchend', function() {
   //event to revert Twitter LI back to normal
   $(this).html('<p> tweets</p>').append('<p class="num">' + getnumString(twCount) + '</p>');
+  //test: console.log("successful twitter li revert event");
+  
   //event to change Twitter LI for people using tab navigation
 }).on('keyup', function(e) {
   if (e.which === 9) {
     e.preventDefault();
     $(this).html('<a  class="sharelink" href="' + twShareUrl + '">TWEET<br>LINK</a>');
+    //test: console.log("successful twitter li alt nav change event");
   }
   //event to revert Twitter LI for people using tab navigation
 }).on('keydown', function(e) {
@@ -114,6 +125,7 @@ $('#social .twitter').on('mouseenter touchmove', function() {
   if (e.which === 9 && $(this).children('.sharelink').length) {
 
     $(this).html('<p> tweets</p>').append('<p class="num">' + getnumString(twCount) + '</p>');
+    //test: console.log("successful twitter li alt nav revert event");
   }
 });
 
@@ -121,19 +133,24 @@ $('#social .twitter').on('mouseenter touchmove', function() {
 $('#social .facebook').on('mouseenter touchmove', function() {
   //change share count text to share link
   $(this).html('<a  class="sharelink"  href="' + fbShareUrl + '">SHARE<BR>ON FB</a>');
+  //test: console.log("successful fb change event");
   //event to revert FB LI back to normal
 }).on('mouseleave touchcancel touchend', function() {
   $(this).html('<p>likes</p>').append('<p class="num">' + getnumString(fbCount) + '</p>');
+  //test: console.log("successful fb li revert event");
+  
     //event to change FB LI for people using tab navigation
 }).on('keyup', function(e) {
   if (e.which === 9) {
     e.preventDefault();
     $(this).html('<a  class="sharelink"  href="' + fbShareUrl + '">SHARE<BR>ON FB</a>');
+    //test: console.log("successful fb li alt nav change event");
   }
   //event to revert FB LI for people using tab navigation
 }).on('keydown', function(e) {
   //check if user pressed tab and whether the previous LI change event was executed
   if (e.which === 9 && $(this).children('.sharelink').length) {
     $(this).html('<p>likes</p>').append('<p class="num">' + getnumString(fbCount) + '</p>');
+    //test: console.log("successful fb li alt nav revert event");
   }
 });
